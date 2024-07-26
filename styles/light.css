@@ -49,13 +49,6 @@
 
 @media (prefers-color-scheme: light) {
 
-  @media (width < 768px) {
-    .page.theme_auto {
-      --header-font-size: clamp(7.25rem, 7.0115rem + 1.0178vw, 7.5rem);
-      --main-indent-inline: 10px;
-      --main-indent-block: 50px;
-    }
-  }
   .page.theme_auto {
     --background-color: #fff1f7;
     --main-font-color: #353430;
@@ -85,5 +78,13 @@
 
   .page.theme_auto .text-block__title {
     color: var(--accent-font-color);
+  }
+
+  @media (width < 768px) {
+    .page.theme_auto {
+      --header-font-size: clamp(7.25rem, 7.0115rem + 1.0178vw, 7.5rem);
+      --main-indent-inline: 10px;
+      --main-indent-block: 50px;
+    }
   }
 }
