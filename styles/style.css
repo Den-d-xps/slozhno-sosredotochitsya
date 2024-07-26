@@ -1,5 +1,417 @@
 /* Основные стили проекта. Это стили для темы, которую вы верстаете первой. */
 
+/*
+Общие стили.
+-------------------------------------------------
+*/
+
+.decorated-zone {
+  position: relative;
+  block-size: calc(100vb - (var(--main-indent-inline) * 2));
+}
+
+.decorated-zone::after,
+.decorated-zone::before {
+  content: "";
+  position: absolute;
+  block-size: 25px;
+  inline-size: 25px;
+}
+
+.decorated-zone::after {
+  top: 0;
+  right: 0;
+  border-color: var(--accent-block-color);
+  border-top: 1px solid;
+  border-right: 1px solid;
+}
+
+.decorated-zone::before {
+  bottom: 0;
+  left: 0;
+  border-color: var(--accent-block-color);
+  border-bottom: 1px solid;
+  border-left: 1px solid;
+}
+
+.title-decor {
+  color: var(--accent-font-color);
+  background-color: var(--accent-block-color);
+}
+
+.link {
+  text-decoration: none;
+  text-shadow: 2px 2px 0 var(--accent-block-color);
+}
+
+.link:hover {
+  border-bottom: 1px solid currentColor;
+}
+
+.link:focus {
+  outline: none;
+}
+
+.link:focus-visible {
+  outline: 1px solid currentColor;
+}
+
+/*
+Стили страницы.
+-------------------------------------------------
+*/
+
 .page {
   /* сохраните в разметке и стилях класс page. На его основе работает скрипт. */
+  position: relative;
+  padding: var(--main-indent-inline);
+  background-color: var(--background-color);
+  background-image: var(--background-page);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  inline-size: 100%;
+}
+
+.page__decorate {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  display: flex;
+  gap: 10px;
+  color: var(--accent-block-color);
+}
+
+.page__decorate::before {
+  content: "rec";
+  color: currentColor;
+  font-family: "IBM Plex Mono";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
+  text-transform: uppercase;
+}
+
+.page__decorate::after {
+  content: "";
+  align-self: center;
+  border-radius: 50%;
+  box-shadow: 0px 0px 4px 2px currentColor;
+  background-color: currentColor;
+  block-size: 9px;
+  inline-size: 9px;
+}
+
+/*
+Стили для шапки.
+-------------------------------------------------
+*/
+
+.header {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr min-content 1fr;
+  align-items: center;
+}
+
+.header__theme-menu {
+  grid-column: 2 / span 2;
+  grid-row: 1;
+  justify-self: center;
+  align-self: start;
+}
+
+.header__theme-menu-list {
+  display: flex;
+  gap: 10px;
+}
+
+.header__theme-menu-item {
+  block-size: 26px;
+}
+
+.header__theme-menu-button {
+  border: none;
+  padding-inline: 13px;
+  color: var(--accent-block-color);
+  font-family: var(--main-font);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 18px;
+  text-transform: lowercase;
+  background-color: transparent;
+  cursor: pointer;
+  user-select: none;
+  block-size: 100%;
+}
+
+.header__theme-menu-button:hover {
+  outline: 1px solid var(--hover-color);
+}
+
+.header__theme-menu-button:focus {
+  outline: none;
+}
+
+.header__theme-menu-button:focus-visible {
+  border-block-end: 1px solid currentColor;
+}
+
+.header__theme-menu-button_active {
+  outline: 1px solid currentColor;
+  pointer-events: none;
+}
+
+.header__title {
+  grid-column: 1 / span 4;
+  grid-row: 2;
+  margin-inline-start: -20px;
+  color: var(--header-font-color);
+  font-family: var(--main-font);
+  font-weight: 700;
+  font-size: var(--header-font-size);
+  line-height: 83%;
+  text-shadow: 4px 4px 0 var(--accent-block-color);
+}
+
+.header__subtitle {
+  grid-column: -1 / -3;
+  grid-row: 3;
+  font-family: var(--main-font);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23.4px;
+}
+
+/*
+Стили для текстовых секций.
+-------------------------------------------------
+*/
+
+.text-block {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: min-content 1fr;
+  gap: 20px;
+  margin-block-start: var(--main-indent-block);
+}
+
+.text-block__title {
+  color: var(--accent-block-color);
+  font-family: var(--main-font);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23.4px;
+}
+
+.text-block__list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.text-block:nth-child(odd) .text-block__title {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.text-block:nth-child(odd) .text-block__list {
+  grid-column: 2 / span 2;
+  grid-row: 1 / span 2;
+}
+
+.text-block:nth-child(even) .text-block__title {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.text-block:nth-child(even) .text-block__list {
+  flex-direction: row;
+  grid-column: 1 / span 3;
+  grid-row: 2;
+}
+
+.text-block__item {
+  flex: 0 1 33.33%;
+}
+
+/*
+Стили для текстовых карточек.
+-------------------------------------------------
+*/
+
+.cart__title {
+  font-family: var(--main-font);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23.4px;
+}
+
+.text-block:nth-child(3) .text-block__item:not(:first-child) .cart__title {
+  font-weight: 400;
+}
+
+.cart__text {
+  margin-block-start: 10px;
+  color: var(--main-font-color);
+  font-family: var(--main-font);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 23.4px;
+}
+
+/*
+Стили для секции с картинками.
+-------------------------------------------------
+*/
+
+.picture-block {
+  margin-block-start: var(--main-indent-block);
+}
+
+.picture-block__title {
+  margin-block-end: var(--main-indent-inline);
+  font-family: var(--main-font);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23.4px;
+}
+
+.picture-block__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: minmax(192px, 260px) minmax(230px, 315px) minmax(
+      318px,
+      428px
+    );
+  gap: var(--main-indent-inline);
+  block-size: clamp(48.75rem, -1.5rem + 104.6875vw, 65.5rem);
+}
+
+.picture-block__item:nth-child(1) {
+  grid-column: span 2;
+}
+
+.picture-block__item:nth-child(2) {
+  grid-row: span 2;
+}
+
+.picture-block__item:nth-child(3) {
+  grid-row: span 2;
+}
+
+.picture-block__item:nth-child(5) {
+  grid-column: span 2;
+}
+
+.picture-block__img {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/*
+Стили для подвала.
+-------------------------------------------------
+*/
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block-start: var(--main-indent-block);
+}
+
+.footer__title {
+  color: var(--header-font-color);
+  font-family: var(--main-font);
+  font-weight: 700;
+  font-size: var(--header-font-size);
+  line-height: 83%;
+  text-shadow: 2px 2px 0 var(--accent-block-color);
+}
+
+/*
+Медиа-запросы.
+-------------------------------------------------
+*/
+
+@media (width < 1024px) {
+  .header__theme-menu {
+    grid-column: -1 / -2;
+    grid-row: 1;
+    justify-self: end;
+    align-self: center;
+  }
+
+  .header__theme-menu-list {
+    flex-direction: column;
+  }
+
+  .text-block:nth-child(odd) .text-block__list {
+    padding-inline-start: 8px;
+  }
+
+  .text-block:nth-child(even) .text-block__list {
+    flex-direction: column;
+  }
+}
+
+@media (width < 768px) {
+  .page__decorate {
+    top: 10px;
+    right: 20px;
+  }
+
+  .header {
+    grid-template-columns: 1fr;
+  }
+
+  .header__title {
+    margin-inline-start: 0;
+  }
+
+  .header__subtitle {
+    grid-column: -1 / -2;
+  }
+
+  .text-block {
+    grid-template-columns: 1fr;
+  }
+
+  .text-block__title {
+    grid-column: 1;
+  }
+
+  .text-block:nth-child(even) .text-block__list {
+    grid-row: 2;
+  }
+
+  .text-block:nth-child(odd) .text-block__list {
+    grid-column: 1;
+    grid-row: 2;
+    padding-inline-start: 0;
+  }
+
+  .text-block:nth-child(odd) .text-block__title {
+    grid-row: 1;
+  }
+
+  .picture-block__list {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, min-content);
+    block-size: 100%;
+  }
+
+  .picture-block__item {
+    block-size: min-content;
+  }
+
+  .picture-block__item:nth-child(n) {
+    grid-column: auto;
+    grid-row: auto;
+  }
 }
