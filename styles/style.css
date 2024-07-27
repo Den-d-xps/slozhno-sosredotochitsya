@@ -12,12 +12,12 @@
 .decorated-zone::after,
 .decorated-zone::before {
   content: "";
-  position: absolute;
   block-size: 25px;
   inline-size: 25px;
 }
 
 .decorated-zone::after {
+  position: absolute;
   top: var(--main-indent-inline);
   right: var(--main-indent-inline);
   border-top: 1px solid;
@@ -26,6 +26,7 @@
 }
 
 .decorated-zone::before {
+  position: absolute;
   bottom: var(--main-indent-inline);
   left: var(--main-indent-inline);
   border-bottom: 1px solid;
@@ -83,7 +84,7 @@
 .page__decorate::before {
   content: "rec";
   color: currentColor;
-  font-family: "IBM Plex Mono";
+  font-family: var(--main-font);
   font-weight: 400;
   font-size: 18px;
   line-height: 25px;
@@ -112,6 +113,7 @@
   grid-template-rows: 1fr min-content 1fr;
   align-items: center;
   block-size: 100vb;
+  min-block-size: 668px;
 }
 
 .header__theme-menu {
@@ -205,6 +207,18 @@
   line-height: 23.4px;
 }
 
+.text-block__subtitle {
+  font-family: var(--main-font);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23.4px;
+}
+
+.text-block__title  + .text-block__subtitle {
+  grid-column: 2 / span 2;
+  grid-row: 1;
+}
+
 .text-block__list {
   display: flex;
   flex-direction: column;
@@ -219,6 +233,10 @@
 .text-block:nth-child(odd) .text-block__list {
   grid-column: 2 / span 2;
   grid-row: 1 / span 2;
+}
+
+.text-block:nth-child(odd) .text-block__subtitle + .text-block__list {
+  grid-row: 2;
 }
 
 .text-block:nth-child(even) .text-block__title {
@@ -248,7 +266,7 @@
   line-height: 23.4px;
 }
 
-.text-block:nth-child(3) .text-block__item:not(:first-child) .cart__title {
+.text-block:nth-child(3) .cart__title {
   font-weight: 400;
 }
 
@@ -326,6 +344,7 @@
   align-items: center;
   margin-block-start: var(--main-indent-block);
   block-size: 100vb;
+  min-block-size: 668px;
 }
 
 .footer__title {
@@ -388,7 +407,17 @@
     grid-column: 1;
   }
 
+  .text-block__title + .text-block__subtitle {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .text-block:nth-child(odd) .text-block__subtitle + .text-block__list {
+    grid-row: 3;
+  }
+
   .text-block:nth-child(even) .text-block__list {
+    grid-column: 1;
     grid-row: 2;
   }
 
